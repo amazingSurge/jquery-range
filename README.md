@@ -25,9 +25,9 @@ And CSS:
 
 Create base html element:
 ```html
-	<div class="example">
-		<div class="range-single"></div>
-	</div>
+    <div class="example">
+        <div class="range-single"></div>
+    </div>
 ```
 
 Initialize range:
@@ -37,12 +37,12 @@ $(".range-single").range({skin: 'skin-1'});
 
 Or you can also use <code>input</code>
 ```html
-	<div class="example">
-		<form method="post">
-			<input class="range-input" type="range" min="0" max="10" name="points" step="0.01" />
-			<button class="submit">submit</button>
-		</form>
-	</div>
+    <div class="example">
+        <form method="post">
+            <input class="range-input" type="range" min="0" max="10" name="points" step="0.01" />
+            <button class="submit">submit</button>
+        </form>
+    </div>
 ```
 
 Initialize range:
@@ -54,7 +54,7 @@ Or initialize tabs with custom settings:
 ```javascript
 
 $(".range-single").range({
- 		namespace: 'range',
+        namespace: 'range',
         skin: null,
         max: 100,
         min: 0,
@@ -77,87 +77,54 @@ the most important thing is you should set skin value to let plugin load specifi
 
 ## Settings
 
-<table>
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>namespace</td>
-            <td>"range"</td>
-            <td>Optional property, set a namspace for css class, for example, we have <code>.range_active</code> class for active effect, if namespace set to 'as-range', then it will be <code>.as-range_active</code></td>
-        </tr>
-        <tr>
-            <td>skin</td>
-            <td>null</td>
-            <td>Compulsory property, set transition effect, it works after you load specified skin file</td>
-        </tr>
-        <tr>
-            <td>max</td>
-            <td>100</td>
-            <td>Optional property, set the maximum range value of the progress bar</td>
-        </tr>
-        <tr>
-            <td>min</td>
-            <td>0</td>
-            <td>Optional property, set the initial value of the progress bar</td>
-        </tr>
-        <tr>
-            <td>value</td>
-            <td><code>[0,20]</code></td>
-            <td>Optional property, set the pointer to the initial position</td>
-        </tr>
-        <tr>
-            <td>step</td>
-            <td>10</td>
-            <td>Optional property, set up the moving step at a time</td>
-        </tr>
-        <tr>
-            <td>pointer</td>
-            <td>2</td>
-            <td>Optional property, set the number of pointer</td>
-        </tr>
-        <tr>
-            <td>limit</td>
-            <td>true</td>
-            <td>Optional property, if true, limit the range of the pointer moving</td>
-        </tr>
-        <tr>
-            <td>orientation</td>
-            <td>'v'</td>
-            <td>Optional property, set the direction for the progress bar ,'v' for vertical and 'h' for horizontal</td>
-        </tr>
-		<tr>
-            <td>tip</td>
-            <td>true</td>
-            <td>Optional property, if true, the component of tip will  display and follow the pointer</td>
-        </tr>
-		<tr>
-            <td>scale</td>
-            <td>false</td>
-            <td>Optional property, if false, the component of scale will be initialized</td>
-        </tr>
-		<tr>
-            <td>format</td>
-            <td><code>function(value) {return value;}</code></td>
-            <td>Optional property, a function of formatting output </td>
-        </tr>
-		<tr>
-            <td>onChange</td>
-            <td><code>function(instance) {}</code></td>
-            <td>Optional property, according to your need, it can be as a function of the extended interface</td>
-        </tr>  
-		<tr>
-            <td>callback</td>
-            <td><code>function() {}</code></td>
-            <td>Optional property, if it's a funciton, will be called when mouseup</td>
-        </tr>   
-    </tbody>
-</table>
+```javascript
+{   
+
+    // Optional property, Set a namespace for css class
+    namespace: 'range',
+    
+    //Compulsory property, set transition effect, it works after you load specified skin file
+    skin: null,
+
+    //Optional property, set the maximum for range
+    max: 100,
+
+    //Optional property, set the minmum for range
+    min: 0,
+
+    //Optional property, set the initial position for the range pointer
+    value: [0,20],
+
+    //Optional property, set the moving step for pointer
+    step: 10,
+
+    //Optional property, set the number of pointer
+    pointer: 2,
+
+    //Optional property, if true restrictions on the movement of the pointer
+    limit: true,
+
+    //Optional property, set the direction for range ,'v' for vertical and 'h' for horizontal
+    orientation: 'v',
+
+    //Optional property, if true, the component of tip will display and follow the pointer
+    tip: true,
+
+    //Optional property, if false, the component of scale will be initialized
+    scale: false,
+
+    //Optional property, a function of formatting output
+    format: function(value) {
+        return value;
+    },
+
+    //Optional property, according to your need, it can be as a function of the extended interface
+    onChange: function() {},
+
+    //Optional property, if it's a funciton, will be called when mouseup
+    callback: function() {}
+}
+```
 
 ## Public methods
 
@@ -195,10 +162,6 @@ p.$element.on('change', function(e, pointer) {
     // pointer means current pointer 
     // some stuff
 });
-p.$element.on('end', function(e, pointer) {
-	//pointer means current pointer
-	//some stuff
-});
 ```
 
 ## Browser support
@@ -210,9 +173,14 @@ Mobile browsers (like Opera mini, Chrome mobile, Safari mobile, Android browser 
 
 | Version | Notes                                                            |
 |---------|------------------------------------------------------------------|
+|   0.3.x | ([compare][compare-1.3]) add scale function                    |
+|   0.2.x | ([compare][compare-1.2]) add view function                    |
+|   0.1.x | ([compare][compare-1.1]) add tip function                   |
 |     ... | ...                                                              |
 
-
+[compare-1.3]: https://github.com/amazingSurge/jquery-range/compare/v1.3.0...v1.4.0
+[compare-1.2]: https://github.com/amazingSurge/jquery-range/compare/v1.2.0...v1.3.0
+[compare-1.1]: https://github.com/amazingSurge/jquery-range/compare/v1.1.0...v1.2.0
 ## Author
 [amazingSurge](http://amazingSurge.com)
 
