@@ -196,7 +196,7 @@ var scale = {
     scale.values.push(instance.min);
     const part = (instance.max - instance.min) / (scale.valuesNumber - 1);
     for (let j = 1; j <= (scale.valuesNumber - 2); j++) {
-      scale.values.push(part * j);
+      scale.values.push(part * j + instance.min);
     }
     scale.values.push(instance.max);
     const classes = {
@@ -435,7 +435,7 @@ var keyboard = function() {
       });
     }
   });
-}
+};
 
 let components = {};
 

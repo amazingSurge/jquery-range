@@ -5,7 +5,9 @@
 * Copyright (c) amazingSurge
 * Released under the LGPL-3.0 license
 */
-(function(global, factory) {
+(
+
+  function(global, factory) {
   if (typeof define === "function" && define.amd) {
     define(['jquery'], factory);
   } else if (typeof exports !== "undefined") {
@@ -17,7 +19,8 @@
     factory(global.jQuery);
     global.jqueryAsRangeEs = mod.exports;
   }
-})(this,
+}
+)(this,
 
   function(_jquery) {
     'use strict';
@@ -38,7 +41,7 @@
       :
 
       function(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
       };
 
     function _classCallCheck(instance, Constructor) {
@@ -291,7 +294,7 @@
         var part = (instance.max - instance.min) / (scale.valuesNumber - 1);
 
         for (var j = 1; j <= scale.valuesNumber - 2; j++) {
-          scale.values.push(part * j);
+          scale.values.push(part * j + instance.min);
         }
         scale.values.push(instance.max);
         var classes = {
@@ -1053,50 +1056,36 @@
     var OtherAsRange = _jquery2.default.fn.asRange;
 
     var jQueryAsRange = function jQueryAsRange(options) {
-      var _this5 = this;
-
       for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
         args[_key2 - 1] = arguments[_key2];
       }
 
       if (typeof options === 'string') {
-        var _ret = function() {
-          var method = options;
+        var method = options;
 
-          if (/^_/.test(method)) {
+        if (/^_/.test(method)) {
 
-            return {
-              v: false
-            };
-          } else if (/^(get)$/.test(method) || method === 'val' && args.length === 0) {
-            var instance = _this5.first().data(NAMESPACE);
+          return false;
+        } else if (/^(get)$/.test(method) || method === 'val' && args.length === 0) {
+          var instance = this.first().data(NAMESPACE);
 
-            if (instance && typeof instance[method] === 'function') {
+          if (instance && typeof instance[method] === 'function') {
 
-              return {
-                v: instance[method].apply(instance, args)
-              };
-            }
-          } else {
-
-            return {
-              v: _this5.each(
-
-                function() {
-                  var instance = _jquery2.default.data(this, NAMESPACE);
-
-                  if (instance && typeof instance[method] === 'function') {
-                    instance[method].apply(instance, args);
-                  }
-                }
-              )
-            };
+            return instance[method].apply(instance, args);
           }
-        }();
+        } else {
 
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object")
+          return this.each(
 
-          return _ret.v;
+            function() {
+              var instance = _jquery2.default.data(this, NAMESPACE);
+
+              if (instance && typeof instance[method] === 'function') {
+                instance[method].apply(instance, args);
+              }
+            }
+          );
+        }
       }
 
       return this.each(
